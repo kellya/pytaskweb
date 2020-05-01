@@ -4,7 +4,7 @@
     </head>
     <body>
         {% for project in projects %}
-        {{ project.replace('_', ' ') }}<br>
+        <a href="{{ url_for('project_tasks', name=project)}}"> {{ project.replace('_', ' ') }}</a><br>
         {% endfor %}
     </body>
 </html>

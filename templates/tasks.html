@@ -1,0 +1,10 @@
+<html>
+    <head>
+        <title>Testing</title>
+    </head>
+    <body>
+        {% for task in tasks %}
+        <a href="{{ url_for('task_detail', uuid=task['uuid']) }}"> {{ task['id'] }}</a>{{ task['description'] }}<br>
+        {% endfor %}
+    </body>
+</html>
