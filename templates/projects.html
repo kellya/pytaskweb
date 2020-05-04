@@ -1,7 +1,3 @@
-{% extends "base.html" %}
-{% block title %}Projects{% endblock %}
-{% block body %}
     {% for project in projects %}
-    <a class="button" href="{{ url_for('project_tasks', name=project)}}"> {{ project.replace('_', ' ') }}</a><br>
+    <a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}"> {{ project.replace('_', ' ') }}</a><br>
     {% endfor %}
-{% endblock %}

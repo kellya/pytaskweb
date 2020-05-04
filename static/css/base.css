@@ -1,6 +1,20 @@
-.button {
+.prjbutton {
     display: inline-block;
     padding: 3px 5px;
     border: 1px solid #000;
     background: #eee;
+}
+
+#leftpanel{
+    position:absolute;
+    left:0;
+    margin-left:auto;
+    margin-right:auto;
+    border: 1px dashed;
+}
+
+#centerpanel{
+    position:absolute;
+    left: 250px;
+    border: 1px solid;
 }
