@@ -21,8 +21,8 @@ class Task:
         while iter < maxiter:
             try:
                 if self.alltasks[iter]['project'] not in allprojects:
-                   # if '.' in alltasks[iter]['project']:
-                   #     parentproj = alltasks[iter]['projects'].split('.')[0]
+                    # if '.' in alltasks[iter]['project']:
+                    #     parentproj = alltasks[iter]['projects'].split('.')[0]
                     allprojects.append(self.alltasks[iter]['project'])
             except KeyError:
                 pass
@@ -42,6 +42,7 @@ class Task:
                 pass
             iter += 1
         return projecttasks
+
     def get_task_detail(self, uuid):
         """Return a dictionary of task details"""
         iter = 0
@@ -54,15 +55,19 @@ class Task:
                 pass
             iter += 1
 
+
 def main():
     myprojects = Task()
     app = Flask(__name__)
 
-    projects = sorted(myprojects.get_all_projects(), key=lambda s: s.lower())
-
     @app.route('/')
     def home():
-        return render_template('index.html', projects=projects)
+        return render_template('index.html')
+
+    @app.route('/projects')
+    def projects():
+        projects = sorted(myprojects.get_all_projects(), key=lambda s: s.lower())
+        return render_template('projects.html', projects=projects)
 
     @app.route('/project_tasks/<name>')
     def project_tasks(name):

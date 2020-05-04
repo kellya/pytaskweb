@@ -1,10 +1,5 @@
-<html>
-    <head>
-        <title>Testing</title>
-    </head>
-    <body>
-        {% for project in projects %}
-        <a href="{{ url_for('project_tasks', name=project)}}"> {{ project.replace('_', ' ') }}</a><br>
-        {% endfor %}
-    </body>
-</html>
+{% block title %}Home{% endblock %}
+{% block body %}
+<a href="{{ url_for('projects') }}">Projects</a>
+{% endblock %}
+
