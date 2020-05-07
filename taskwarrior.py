@@ -2,7 +2,7 @@
 
 import subprocess
 import json
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 
 class Task:
@@ -66,8 +66,8 @@ def main():
 
     @app.route('/projects')
     def projects():
-        projects = sorted(myprojects.get_all_projects(), key=lambda s: s.lower())
-        return render_template('projects.html', projects=projects)
+        project = sorted(myprojects.get_all_projects(), key=lambda s: s.lower())
+        return render_template('projects.html', projects=project)
 
     @app.route('/project_tasks/<name>')
     def project_tasks(name):
@@ -77,6 +77,16 @@ def main():
     def task_detail(uuid):
         return render_template('task_detail.html',
                                task=myprojects.get_task_detail(uuid))
+
+    @app.route('/complete/<uuid>', methods=['POST'])
+    def task_complete(uuid):
+        result = request.form.to_dict()
+        print(str(result))
+        if result['submit'] == 'complete':
+            return render_template('complete.html', result=result)
+        elif result['submit'] == 'edit':
+            return render_template('edit.html', result=result)
+
     app.run(debug=True)
 
 
