@@ -1,7 +1,7 @@
-{% extends "base.html" %}
-{% block title %}Tasks{% endblock %}
+{% extends "base.html" %} 
 {% block body %}
+<h1>Tasks</h1>
     {% for task in tasks %}
-    <a href="{{ url_for('task_detail', uuid=task['uuid']) }}"> {{ task['id'] }}</a>{{ task['description'] }}<br>
+    <a class="tasklink" href="{{ url_for('task_detail', uuid=task['uuid']) }}"> {{ task['description'] }}</a><br>
     {% endfor %}
 {% endblock %}

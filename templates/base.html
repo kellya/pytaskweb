@@ -3,23 +3,9 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-        <script src="{{ url_for('static', filename='js/jquery-3.5.0.min.js') }}"></script>
-    <script>
-        $(document).ready(function(){
-            $.get("{{url_for('projects')}}", function(data) {
-                $("#leftpanel").html(data);
-            });
-            $(".prjbutton").click(function(){
-                $("#centerpanel").load(this.href)
-            });
-        });
-    </script>
     </head>
     <body>
-        <div id='leftpanel'></div>
-        <div id='centerpanel'>
         {% block body %}
         {% endblock %}
-        </div>
     </body>
 </html>

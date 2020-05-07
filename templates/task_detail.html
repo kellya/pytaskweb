@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Tasks{% endblock %}
 {% block body %}
+<h1>Task Detail</h1>
     {% for k,v in task.items() %}
     {{ k }}: {{ v }}<br>
     {%endfor%}

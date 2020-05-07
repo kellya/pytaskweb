@@ -1,8 +1,23 @@
+a:link{
+    color: blue;
+}
+a:visited{
+    color:blue;
+}
+a:hover{
+    color:red;
+}
 .prjbutton {
     display: inline-block;
     padding: 3px 5px;
-    border: 1px solid #000;
     background: #eee;
+    text-decoration: none;
+}
+
+.tasklink {
+    display: inline-block;
+    padding: 3px 5px;
+    text-decoration: none;
 }
 
 #leftpanel{
@@ -17,4 +32,25 @@
     position:absolute;
     left: 250px;
     border: 1px solid;
+}
+
+iframe#left{
+    position: left;
+    height: 500px;
+    border: none;
+}
+
+iframe#center{
+    position: absolute;
+    margin-left: 10px;
+    height: 90%;
+    width: 80%;
+    border: none;
+}
+
+h1 {
+    font-size: 1em;
+    text-align: center;
+    color: #fff;
+    background: black;
 }
