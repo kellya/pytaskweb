@@ -3,9 +3,9 @@
 <h1>Tasks</h1>
     <div class="toolbox">
         <form method="POST" name="project_tasks" action="{{ url_for('project_tasks', name=tasks[0]['project'])}}">
-            <button type="submit" name="sync" title="Refresh task list" value="sync" class="btn btn-default">
+            <button type="submit" name="sync" title="Refresh task list" value="sync" class="btn btn-outline-dark">
                 <i class="fa fa-refresh"></i>
-            <button type="submit" name="add_task" title="Add a new task" value="add_task" class="btn btn-default">
+            <button type="submit" name="add_task" title="Add a new task" value="add_task" class="btn btn-outline-dark">
                 <i class="fa fa-plus"></i>
         </form>
     </div>

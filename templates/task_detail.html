@@ -3,21 +3,34 @@
 <h1>Task Detail</h1>
     <div class="toolbox">
         <form class="frmback" method="GET" name="back" action="{{ url_for('project_tasks', name=task['project']) }}">
-            <button type="submit" title="Back to project tasks" name="submit" value='back' class="btn btn-default">
+            <button type="submit" title="Back to project tasks" name="submit" value='back' class="btn btn-outline-dark">
                 <i class="fa fa-arrow-left"></i>
             </button>
         </form>
         <form method="POST" name="complete" action="{{ url_for('task_complete', uuid=task['uuid']) }}}">
             <input type='hidden' name='uuid' value={{ task['uuid'] }}>
-            <button type="submit" title="Mark task completed" name="submit" value='complete' class="btn btn-default">
+            <button type="submit" title="Mark task completed" name="submit" value='complete' class="btn btn-outline-dark">
                 <i class="fa fa-check-square"></i>
             </button>
-            <button type="submit" title="Edit this task" name="submit" value='edit' class="btn btn-default">
+            <button type="submit" title="Edit this task" name="submit" value='edit' class="btn btn-outline-dark">
                 <i class="fa fa-edit"></i>
             </button>
         </form>
     </div>
-    {% for k,v in task.items() %}
-    {{ k }}: {{ v }}<br>
+    <table class="taskdetail">
+        {% for k,v in task.items() %}
+        <tr>
+            <td class="title">{{ k }}:</td>
+            <td>
+            {% if k.lower() == 'tags' %}
+            {%  for tag in v %}
+                <button type="button" class="btn btn-primary">{{ tag }}</button>
+            {% endfor %}
+            {% else %}
+                {{ v }}
+            {% endif %}
+            </td>
+        </tr>
     {%endfor%}
+    </table>
 {% endblock %}
