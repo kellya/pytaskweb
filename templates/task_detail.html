@@ -1,16 +1,18 @@
 {% extends "base.html" %}
 {% block body %}
 <h1>Task Detail</h1>
+    <div class="toolbox">
+        <form method="POST" name="complete" action="{{ url_for('task_complete', uuid=task['uuid']) }}}">
+            <input type='hidden' name='uuid' value={{ task['uuid'] }}>
+            <button type="submit" title="Mark task completed" name="submit" value='complete' class="btn btn-default">
+                <i class="fa fa-check-square"></i>
+            </button>
+            <button type="submit" title="Edit this task" name="submit" value='edit' class="btn btn-default">
+                <i class="fa fa-edit"></i>
+            </button>
+        </form>
+    </div>
     {% for k,v in task.items() %}
     {{ k }}: {{ v }}<br>
     {%endfor%}
-    <form method="POST" name="complete" action="{{ url_for('task_complete', uuid=task['uuid']) }}}">
-        <input type='hidden' name='uuid' value={{ task['uuid'] }}>
-        <button type="submit" title="Mark task completed" name="submit" value='complete' class="btn btn-default">
-            <i class="fa fa-check-square"></i>
-        </button>
-        <button type="submit" title="Edit this task" name="submit" value='edit' class="btn btn-default">
-            <i class="fa fa-edit"></i>
-        </button>
-    </form>
 {% endblock %}
