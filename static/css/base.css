@@ -81,3 +81,7 @@ table.taskdetail tr:hover td {
 .child {
     margin-left: 15px;
 }
+
+.toolbox {
+    padding-bottom: 4px;
+}
