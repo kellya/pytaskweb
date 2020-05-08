@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block body %}
 <h1>Projects</h1>
+    <div class="toolbox">
+        <form method="POST" name="projects" action="{{ url_for('projects') }}">
+            <button type="submit" name='sync' title="Refresh project list" value="sync" class="btn btn-default">
+                <i class="fa fa-refresh"></i>
+            </button>
+        </form>
+    </div>
     {% for project in projects %}
     <a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ') }}</a><br>
     {% endfor %}

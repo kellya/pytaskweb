@@ -9,14 +9,17 @@ class Task:
     """An object to hold task data obtained from the task command"""
     task_cmd = 'task'
     search_filter = 'status:pending'
-    projoutput = subprocess.run([task_cmd, search_filter, 'export'],
-                                stdout=subprocess.PIPE)
-    alltasks = json.loads(projoutput.stdout)
+
+    def load_task_data(self):
+        projoutput = subprocess.run([self.task_cmd, self.search_filter, 'export'],
+                                    stdout=subprocess.PIPE)
+        self.alltasks = json.loads(projoutput.stdout)
 
     def get_all_projects(self):
         """Return a list of unique projects"""
         allprojects = []
         iter = 0
+        self.load_task_data()
         maxiter = len(self.alltasks)
         while iter < maxiter:
             try:
@@ -64,7 +67,7 @@ def main():
     def home():
         return render_template('index.html')
 
-    @app.route('/projects')
+    @app.route('/projects', methods=['get', 'post'])
     def projects():
         project = sorted(myprojects.get_all_projects(), key=lambda s: s.lower())
         return render_template('projects.html', projects=project)
