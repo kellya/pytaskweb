@@ -1,6 +1,6 @@
 {% extends "base.html" %} dd
 {% block body %}
-<h1>Tasks</h1>
+<h1 class="sectiontitle">Tasks</h1>
     <div class="toolbox">
         <form method="POST" name="project_tasks" action="{{ url_for('project_tasks', name=tasks[0]['project'])}}">
             <button type="submit" name="sync" title="Refresh task list" value="sync" class="btn btn-outline-dark">

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<h1>Projects</h1>
+<h1 class="sectiontitle">Projects</h1>
     <div class="toolbox">
         <form method="POST" name="projects" action="{{ url_for('projects') }}">
             <button type="submit" name='sync' title="Refresh project list" value="sync" class="btn btn-outline-dark">
@@ -10,7 +10,9 @@
     </div>
     {% for project in projects %}
     {%  if '.' in project %}
-        &nbsp;&nbsp; <span>&#124;</span><a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ').split('.')[1] }}</a><br>
+        <div class="child">
+            <span>&#124;</span><a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ').split('.')[1] }}</a><br>
+        </div>
     {%  else %}
         <a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ') }}</a><br>
     {% endif %}
