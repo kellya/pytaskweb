@@ -23,9 +23,12 @@ class Task:
         maxiter = len(self.alltasks)
         while iter < maxiter:
             try:
+                if '.' in self.alltasks[iter]['project']:
+                    parentproj = self.alltasks[iter]['project'].split('.')[0]
+                    print(parentproj)
+                    if parentproj not in allprojects:
+                        allprojects.append(parentproj)
                 if self.alltasks[iter]['project'] not in allprojects:
-                    # if '.' in self.alltasks[iter]['project']:
-                    #     parentproj = self.alltasks[iter]['projects'].split('.')[0]
                     allprojects.append(self.alltasks[iter]['project'])
             except KeyError:
                 pass
@@ -40,7 +43,7 @@ class Task:
         projecttasks = []
         while iter < maxiter:
             try:
-                if self.alltasks[iter]['project'] == project:
+                if project in self.alltasks[iter]['project']:
                     projecttasks.append(self.alltasks[iter])
             except KeyError:
                 pass

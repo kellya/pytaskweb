@@ -9,6 +9,10 @@
         </form>
     </div>
     {% for project in projects %}
-    <a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ') }}</a><br>
+    {%  if '.' in project %}
+        &nbsp;&nbsp; <span>&#124;</span><a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ').split('.')[1] }}</a><br>
+    {%  else %}
+        <a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ') }}</a><br>
+    {% endif %}
     {% endfor %}
 {% endblock %}
