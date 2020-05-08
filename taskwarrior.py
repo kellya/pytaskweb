@@ -25,7 +25,6 @@ class Task:
             try:
                 if '.' in self.alltasks[iter]['project']:
                     parentproj = self.alltasks[iter]['project'].split('.')[0]
-                    print(parentproj)
                     if parentproj not in allprojects:
                         allprojects.append(parentproj)
                 if self.alltasks[iter]['project'] not in allprojects:
