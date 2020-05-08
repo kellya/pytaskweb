@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import subprocess
 import json
 from flask import Flask, render_template, request
@@ -11,6 +10,7 @@ class Task:
     search_filter = 'status:pending'
 
     def load_task_data(self):
+        """Pull task data from json data exported from the task command"""
         projoutput = subprocess.run([self.task_cmd, self.search_filter, 'export'],
                                     stdout=subprocess.PIPE)
         self.alltasks = json.loads(projoutput.stdout)
@@ -73,16 +73,16 @@ def main():
         project = sorted(myprojects.get_all_projects(), key=lambda s: s.lower())
         return render_template('projects.html', projects=project)
 
-    @app.route('/project_tasks/<name>')
+    @app.route('/project_tasks/<name>', methods=['get', 'post'])
     def project_tasks(name):
         return render_template('tasks.html', tasks=myprojects.get_tasks(name))
 
-    @app.route('/task/<uuid>')
+    @app.route('/task/<uuid>', methods=['get', 'post'])
     def task_detail(uuid):
         return render_template('task_detail.html',
                                task=myprojects.get_task_detail(uuid))
 
-    @app.route('/complete/<uuid>', methods=['POST'])
+    @app.route('/complete/<uuid>', methods=['post'])
     def task_complete(uuid):
         result = request.form.to_dict()
         print(str(result))
