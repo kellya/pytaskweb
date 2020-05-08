@@ -2,6 +2,11 @@
 {% block body %}
 <h1>Task Detail</h1>
     <div class="toolbox">
+        <form class="frmback" method="GET" name="back" action="{{ url_for('project_tasks', name=task['project']) }}">
+            <button type="submit" title="Back to project tasks" name="submit" value='back' class="btn btn-default">
+                <i class="fa fa-arrow-left"></i>
+            </button>
+        </form>
         <form method="POST" name="complete" action="{{ url_for('task_complete', uuid=task['uuid']) }}}">
             <input type='hidden' name='uuid' value={{ task['uuid'] }}>
             <button type="submit" title="Mark task completed" name="submit" value='complete' class="btn btn-default">

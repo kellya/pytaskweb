@@ -61,6 +61,11 @@ a:hover{
     border: none;
 }
 
+.frmback{
+    float: left;
+    margin-right: 5px;
+}
+
 h1 {
     font-size: 1em;
     text-align: center;
