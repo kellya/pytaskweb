@@ -24,8 +24,8 @@ class Task:
         while iter < maxiter:
             try:
                 if self.alltasks[iter]['project'] not in allprojects:
-                    # if '.' in alltasks[iter]['project']:
-                    #     parentproj = alltasks[iter]['projects'].split('.')[0]
+                    # if '.' in self.alltasks[iter]['project']:
+                    #     parentproj = self.alltasks[iter]['projects'].split('.')[0]
                     allprojects.append(self.alltasks[iter]['project'])
             except KeyError:
                 pass
@@ -35,6 +35,7 @@ class Task:
     def get_tasks(self, project):
         """return a list of all tasks within the given {project}"""
         iter = 0
+        self.load_task_data()
         maxiter = len(self.alltasks)
         projecttasks = []
         while iter < maxiter:
