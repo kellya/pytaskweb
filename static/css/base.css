@@ -59,8 +59,8 @@ a:hover{
     margin-right: 5px;
 }
 
-h1 {
-    font-size: 1em;
+h1.sectiontitle {
+    font-size: 1.25em;
     text-align: center;
     color: #fff;
     background: #505050
@@ -76,4 +76,8 @@ td.title {
 
 table.taskdetail tr:hover td {
     background-color: #928989;
+}
+
+.child {
+    margin-left: 15px;
 }

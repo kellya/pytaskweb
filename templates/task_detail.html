@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<h1>Task Detail</h1>
+<h1 class="sectiontitle">Task Detail</h1>
     <div class="toolbox">
         <form class="frmback" method="GET" name="back" action="{{ url_for('project_tasks', name=task['project']) }}">
             <button type="submit" title="Back to project tasks" name="submit" value='back' class="btn btn-outline-dark">
