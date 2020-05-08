@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block title %}pytaskweb-Home{% endblock %}
 {% block body %}
-        <iframe name='left' id='left' src="projects"></iframe>
-        <iframe name='center' id='center'></iframe>
+<div id="left-container">
+    <iframe id='leftiframe' src='projects'></iframe>
+</div>
+<div id="right-container">
+        <iframe name='centeriframe' id='centeriframe'></iframe>
+</div>
 {% endblock %}
 

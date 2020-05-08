@@ -2,6 +2,6 @@
 {% block body %}
 <h1>Projects</h1>
     {% for project in projects %}
-    <a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='center'> {{ project.replace('_', ' ') }}</a><br>
+    <a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ') }}</a><br>
     {% endfor %}
 {% endblock %}
