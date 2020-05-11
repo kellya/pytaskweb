@@ -11,7 +11,7 @@
     {% for project in projects %}
     {%  if '.' in project %}
         <div class="child">
-            <span>&#124;</span><a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ').split('.')[1] }}</a><br>
+            <span>&#9584;</span><a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ').split('.')[1] }}</a><br>
         </div>
     {%  else %}
         <a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ') }}</a><br>
