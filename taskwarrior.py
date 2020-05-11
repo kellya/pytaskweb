@@ -93,6 +93,11 @@ def main():
         elif result['submit'] == 'edit':
             return render_template('edit.html', result=result)
 
+    @app.route('/task_add', methods=['get', 'post'])
+    def task_add():
+        project = request.args.get("project")
+        return render_template('task_add.html', project=project)
+
     app.run(debug=True)
 
 
