@@ -2,13 +2,16 @@
 <html>
     <head>
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/24c0e47a1b.css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/24c0e47a1b.css">
         <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+        {% block head %}
+        {% endblock %}
     </head>
     <body>
         {% block body %}
         {% endblock %}
+        <script src="{{ url_for('static', filename='jquery-ui/jquery-ui.js') }}"></script>
     </body>
 </html>

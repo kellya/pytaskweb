@@ -18,6 +18,14 @@ class Task:
                                     stdout=subprocess.PIPE)
         self.alltasks = json.loads(projoutput.stdout)
 
+    def get_tags(self):
+        taskoutput = subprocess.run([self.task_cmd, "_tags"],
+                                    stdout=subprocess.PIPE)
+        tags = []
+        for tag in taskoutput.stdout.decode().split():
+            tags.append(tag)
+        return tags
+
     def get_all_projects(self):
         """Return a list of unique projects"""
         allprojects = []
@@ -125,7 +133,8 @@ def main():
     @app.route('/task_add', methods=['get', 'post'])
     def task_add():
         project = request.args.get("project")
-        return render_template('task_add.html', project=project)
+        tags = myprojects.get_tags()
+        return render_template('task_add.html', project=project, tags=tags)
 
     app.run(debug=True)
 

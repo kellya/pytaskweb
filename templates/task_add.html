@@ -1,8 +1,36 @@
 {% extends "base.html" %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='jquery/tokenize2/tokenize2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='jQuery-Date-Time-Picke-Plugin-Simple-Datetimepicker/jquery.simple-dtpicker.css') }}">
+    <script src="{{ url_for('static', filename='jquery/jquery.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.tags').tokenize2({
+                placeholder: "Tag",
+                tokensAllowCustom: "True",
+                delimiter: [' ', ',', '-']
+            });
+
+            $('#duedate').appendDtpicker({
+                "current": null,
+                "closeOnSelected": true,
+                "futureOnly": true,
+                "autodateOnStart": false,
+            });
+        });
+    </script>
+{% endblock %}
 {% block body %}
     {{ project }}
     <form action="#" method="post">
-        Description: <input type="text" name="description" aria-label="Description:">
-        Due: <input type="date">
+    <p>Description: <input type="text" name="description" aria-label="Description:"></p>
+    <p> Due: <input type="text" id="duedate" /> </p>
+        <select class="tags" multiple>
+            {% for tag in tags %}
+                <option value="{{ tag }}">{{ tag }}</option>
+            {% endfor %}
+    </select>
     </form>
+    <script src="{{ url_for('static', filename='jQuery-Date-Time-Picke-Plugin-Simple-Datetimepicker/jquery.simple-dtpicker.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery/tokenize2/tokenize2.js') }}"></script>
 {% endblock %}
