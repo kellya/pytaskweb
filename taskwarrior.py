@@ -133,7 +133,19 @@ def main():
     def task_add():
         if request.method == 'POST':
             result = request.form.to_dict()
-            print(result)
+            taskcommand = []
+            taskcommand.append('task')
+            taskcommand.append('add')
+            taskcommand.append(f"project:{result['project']}")
+            if not result['duedate'] == '':
+                taskcommand.append(f"due:{result['duedate']}")
+            if len(result['tags']) > 0:
+                # We have tags, lets split them at the comma
+                for tag in result['tags'].split(','):
+                    taskcommand.append(f"+{tag}")
+
+            taskcommand.append(result['description'])
+            subprocess.run(taskcommand)
         project = request.args.get("project")
         tags = myprojects.get_tags()
         return render_template('task_add.html', project=project, tags=tags)
