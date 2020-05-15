@@ -88,3 +88,7 @@ table.taskdetail tr:hover td {
 a.btn {
     color: #212529;
 }
+html {
+    visibility: visible;
+    opacity: 1;
+}

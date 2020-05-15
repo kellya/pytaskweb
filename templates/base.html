@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style>html{visibility: hidden;opacity:0;}</style>
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="https://use.fontawesome.com/24c0e47a1b.css">
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
         {% block head %}
         {% endblock %}
     </head>
