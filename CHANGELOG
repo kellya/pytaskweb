@@ -1,0 +1,9 @@
+v0.1.0
+An initial release to showcase the basic functionality of the app.
+
+There is still a long way to go for clean-ups, optimizations, and even functionality.  But at this point you can view all your projects, and add a task to a project.
+
+Big things that still don't work?
+You can't create a task for a project that doesn't exist yet
+You can't actually complete tasks
+You can't edit tasks
