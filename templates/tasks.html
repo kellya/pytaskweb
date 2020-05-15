@@ -11,13 +11,14 @@
                 </button>
             </div>
             <div class="btn-group mr-2" role="group" aria-label="Navigation">
-                <button type="submit" name="add_task" title="Add a new task" value="add_task" class="btn btn-outline-dark">
+                <a href="{{ url_for('task_add', project=tasks[0]['project']) }}" class="btn btn-outline-dark" role="button">
                     <i class="fa fa-plus"></i>
+                </a>
                 </button>
             </div>
         </form>
     </div>
     {% for task in tasks %}
-    <a class="tasklink" href="{{ url_for('task_detail', uuid=task['uuid']) }}"> {{ task['description'] }}</a><br>
+    <a class="tasklink" href="{{ url_for('task_detail', uuid=task['uuid']) }}"> {{ task['description'].capitalize() }}</a><br>
     {% endfor %}
 {% endblock %}

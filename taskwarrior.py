@@ -10,13 +10,20 @@ from flask_sqlalchemy import SQLAlchemy
 class Task:
     """An object to hold task data obtained from the task command"""
     task_cmd = 'task'
-    search_filter = 'status:pending'
 
-    def load_task_data(self):
+    def load_task_data(self, search_filter='status:pending'):
         """Pull task data from json data exported from the task command"""
-        projoutput = subprocess.run([self.task_cmd, self.search_filter, 'export'],
+        projoutput = subprocess.run([self.task_cmd, search_filter, 'export'],
                                     stdout=subprocess.PIPE)
         self.alltasks = json.loads(projoutput.stdout)
+
+    def get_tags(self):
+        taskoutput = subprocess.run([self.task_cmd, "_tags"],
+                                    stdout=subprocess.PIPE)
+        tags = []
+        for tag in taskoutput.stdout.decode().split():
+            tags.append(tag)
+        return tags
 
     def get_all_projects(self):
         """Return a list of unique projects"""
@@ -121,6 +128,27 @@ def main():
             return render_template('complete.html', result=result)
         elif result['submit'] == 'edit':
             return render_template('edit.html', result=result)
+
+    @app.route('/task_add', methods=['get', 'post'])
+    def task_add():
+        if request.method == 'POST':
+            result = request.form.to_dict()
+            taskcommand = []
+            taskcommand.append('task')
+            taskcommand.append('add')
+            taskcommand.append(f"project:{result['project']}")
+            if not result['duedate'] == '':
+                taskcommand.append(f"due:{result['duedate']}")
+            if len(result['tags']) > 0:
+                # We have tags, lets split them at the comma
+                for tag in result['tags'].split(','):
+                    taskcommand.append(f"+{tag}")
+
+            taskcommand.append(result['description'])
+            subprocess.run(taskcommand)
+        project = request.args.get("project")
+        tags = myprojects.get_tags()
+        return render_template('task_add.html', project=project, tags=tags)
 
     app.run(debug=True)
 
