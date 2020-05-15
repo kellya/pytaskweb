@@ -23,13 +23,22 @@
 {% block body %}
     {{ project }}
     <form action="#" method="post">
-    <p>Description: <input type="text" name="description" aria-label="Description:"></p>
-    <p> Due: <input type="text" id="duedate" /> </p>
-        <select class="tags" multiple>
+    <p>
+        <label for="description">Description: </label>
+        <input type="text" name="description" aria-label="Description:">
+    </p>
+    <p>
+        <label for="duedate"> Due: </label>
+        <input type="text" id="duedate" />
+    </p>
+    <p>
+        <label for="tags"> Tags:</label>
+        <select class="tags" id="tags" multiple>
             {% for tag in tags %}
                 <option value="{{ tag }}">{{ tag }}</option>
             {% endfor %}
-    </select>
+        </select>
+    </p>
     </form>
     <script src="{{ url_for('static', filename='jQuery-Date-Time-Picke-Plugin-Simple-Datetimepicker/jquery.simple-dtpicker.js') }}"></script>
     <script src="{{ url_for('static', filename='jquery/tokenize2/tokenize2.js') }}"></script>
