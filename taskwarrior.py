@@ -131,6 +131,9 @@ def main():
 
     @app.route('/task_add', methods=['get', 'post'])
     def task_add():
+        if request.method == 'POST':
+            result = request.form.to_dict()
+            print(result)
         project = request.args.get("project")
         tags = myprojects.get_tags()
         return render_template('task_add.html', project=project, tags=tags)

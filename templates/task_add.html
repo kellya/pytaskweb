@@ -17,29 +17,43 @@
                 "futureOnly": true,
                 "autodateOnStart": false,
             });
-        });
+                $("#btn-go").click(function() {
+                    const duedate = $("#duedate").val();
+                    const $formdata = $('form').serializeArray();
+                    const project = $formdata[0].value;
+                    const description = $formdata[1].value;
+                    const tags = $('#tags option:selected').toArray().map(item => item.text);
+                    const dataString = 'duedate=' + duedate + '&description=' + description + '&project=' + project + '&tags=' + tags;
+                    const URL = "{{ url_for('task_add', project=project) }}";
+                    $.post(URL, dataString);
+                    $("form").trigger("reset");
+                })
+});
     </script>
 {% endblock %}
 {% block body %}
     {{ project }}
-    <form action="#" method="post">
-    <p>
-        <label for="description">Description: </label>
-        <input type="text" name="description" aria-label="Description:">
-    </p>
-    <p>
-        <label for="duedate"> Due: </label>
-        <input type="text" id="duedate" />
-    </p>
-    <p>
-        <label for="tags"> Tags:</label>
-        <select class="tags" id="tags" multiple>
-            {% for tag in tags %}
-                <option value="{{ tag }}">{{ tag }}</option>
-            {% endfor %}
-        </select>
-    </p>
+    <form id="task_data" method="POST">
+        <input type="hidden" name="project" value="{{ project }}">
+        <p>
+            <label for="description">Description: </label>
+            <input aria-label="Description:" name="description" placeholder="Enter details of task" type="text" />
+        </p>
+        <p>
+            <label for="duedate"> Due: </label>
+            <input id="duedate" type="text" />
+        </p>
+        <p>
+            <label for="tags"> Tags:</label>
+            <select class="tags" id="tags" multiple="multiple">
+                {% for tag in tags %}
+                    <option value="{{ tag }}">{{ tag }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <input id="btn-go" type="button" value="Submit">
     </form>
     <script src="{{ url_for('static', filename='jQuery-Date-Time-Picke-Plugin-Simple-Datetimepicker/jquery.simple-dtpicker.js') }}"></script>
     <script src="{{ url_for('static', filename='jquery/tokenize2/tokenize2.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery-ui/jquery-ui.js') }}"></script>
 {% endblock %}
