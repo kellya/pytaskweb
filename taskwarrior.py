@@ -10,11 +10,10 @@ from flask_sqlalchemy import SQLAlchemy
 class Task:
     """An object to hold task data obtained from the task command"""
     task_cmd = 'task'
-    search_filter = 'status:pending'
 
-    def load_task_data(self):
+    def load_task_data(self, search_filter='status:pending'):
         """Pull task data from json data exported from the task command"""
-        projoutput = subprocess.run([self.task_cmd, self.search_filter, 'export'],
+        projoutput = subprocess.run([self.task_cmd, search_filter, 'export'],
                                     stdout=subprocess.PIPE)
         self.alltasks = json.loads(projoutput.stdout)
 
