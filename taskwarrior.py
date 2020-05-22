@@ -125,6 +125,11 @@ def main():
         result = request.form.to_dict()
         print(str(result))
         if result['submit'] == 'complete':
+            taskcommand = []
+            taskcommand.append('task')
+            taskcommand.append('done')
+            taskcommand.append(result['uuid'])
+            subprocess.run(taskcommand)
             return render_template('complete.html', result=result)
         elif result['submit'] == 'edit':
             return render_template('edit.html', result=result)

@@ -6,6 +6,9 @@
             <button type="submit" name='sync' title="Refresh project list" value="sync" class="btn btn-outline-dark">
                 <i class="fa fa-refresh"></i>
             </button>
+            <a href="{{ url_for('task_add', project=none) }}" class="btn btn-outline-dark" role="button" target="centeriframe">
+                <i class="fa fa-plus"></i>
+            </a>
         </form>
     </div>
     {% for project in projects %}

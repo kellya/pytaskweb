@@ -32,9 +32,13 @@
     </script>
 {% endblock %}
 {% block body %}
-    {{ project }}
+    <h1>Add task to project</h1>
     <form id="task_data" method="POST">
-        <input type="hidden" name="project" value="{{ project }}">
+        {% if project is none %}
+        <input type="text" name="project" placeholder="Enter a name for a project">
+    {% else %}
+        <input type="text" name="project" readonly="readonly" value="{{ project }}">
+    {% endif %}
         <p>
             <label for="description">Description: </label>
             <input aria-label="Description:" name="description" placeholder="Enter details of task" type="text" />
