@@ -32,31 +32,68 @@
     </script>
 {% endblock %}
 {% block body %}
-    <h1>Add task to project</h1>
-    <form id="task_data" method="POST">
-        {% if project is none %}
-        <input type="text" name="project" placeholder="Enter a name for a project">
+    {% if project is none%}
+        <h1>Add task to new project</h1>
     {% else %}
-        <input type="text" name="project" readonly="readonly" value="{{ project }}">
+        <h1>Add task to project</h1>
     {% endif %}
-        <p>
-            <label for="description">Description: </label>
-            <input aria-label="Description:" name="description" placeholder="Enter details of task" type="text" />
-        </p>
-        <p>
-            <label for="duedate"> Due: </label>
-            <input id="duedate" type="text" />
-        </p>
-        <p>
-            <label for="tags"> Tags:</label>
-            <select class="tags" id="tags" multiple="multiple">
-                {% for tag in tags %}
-                    <option value="{{ tag }}">{{ tag }}</option>
-                {% endfor %}
-            </select>
-        </p>
-        <input id="btn-go" type="button" value="Submit">
+    <div class="toolbox" id="toolbox">
+    {% if project is none %}
+    {% else %}
+        <form class="frmback" method="GET" name="back" action="{{ url_for('project_tasks', name=project) }}">
+            <button type="submit" title="Back to project tasks" name="submit" value='back' class="btn btn-outline-dark">
+                <i class="fa fa-arrow-left"></i>
+            </button>
+        </form>
+    {% endif %}
+    </div>
+    <div class="taskdetail">
+    <form id="task_data" method="POST">
+        <table>
+            <tr>
+                <td><label for="project">Project:</label></td>
+                {% if project is none %}
+                    <td><input type="text" name="project" placeholder="Enter a name for a project"></td>
+                {% else %}
+                    <td><input type="text" name="project" readonly="readonly" value="{{ project }}"></td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td>
+                    <label for="description">Description: </label>
+                </td>
+                <td>
+                    <input aria-label="Description:" name="description" placeholder="Enter details of task" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="duedate"> Due: </label>
+                </td>
+                <td>
+                    <input id="duedate" type="text" />
+                </td>
+                <td>
+            <tr>
+                <td>
+                    <label for="tags"> Tags:</label>
+                </td>
+                <td>
+                    <select class="tags" id="tags" multiple="multiple">
+                        {% for tag in tags %}
+                            <option value="{{ tag }}">{{ tag }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="btn-go" type="button" value="Submit">
+                </td>
+            </tr>
+        </table>
     </form>
+    </div>
     <script src="{{ url_for('static', filename='jQuery-Date-Time-Picke-Plugin-Simple-Datetimepicker/jquery.simple-dtpicker.js') }}"></script>
     <script src="{{ url_for('static', filename='jquery/tokenize2/tokenize2.js') }}"></script>
     <script src="{{ url_for('static', filename='jquery-ui/jquery-ui.js') }}"></script>

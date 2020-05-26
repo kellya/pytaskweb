@@ -83,6 +83,7 @@ table.taskdetail tr:hover td {
 
 .toolbox {
     padding-bottom: 4px;
+    display: block;
 }
 
 a.btn {
