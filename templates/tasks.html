@@ -16,8 +16,9 @@
                 </a>
                 </button>
             </div>
-        </form>
+        </div>
     </div>
+    </form>
     {% for task in tasks %}
     <a class="tasklink" href="{{ url_for('task_detail', uuid=task['uuid']) }}"> {{ task['description'].capitalize() }}</a><br>
     {% endfor %}
