@@ -11,7 +11,7 @@ class Task:
     """An object to hold task data obtained from the task command"""
     task_cmd = 'task'
 
-    def load_task_data(self, search_filter='status:pending'):
+    def load_task_data(self, search_filter='(+work -home or -TAGGED) status:pending'):
         """Pull task data from json data exported from the task command"""
         projoutput = subprocess.run([self.task_cmd, search_filter, 'export'],
                                     stdout=subprocess.PIPE)
@@ -71,6 +71,22 @@ class Task:
                 pass
             iter += 1
 
+    def get_contexts(self):
+        """ Returns a dictionary of contexts and the filter associated with it, or false if none"""
+        contextoutput = subprocess.run([self.task_cmd, '_context'],
+                                       stdout=subprocess.PIPE)
+        contexts = contextoutput.stdout.decode().strip().split('\n')
+        if contexts[0] == "":
+            return False
+        else:
+            context_filters = {}
+            for context in contexts:
+                filter_text = subprocess.run([self.task_cmd, '_get', f'rc.context.{context}'],
+                                             stdout=subprocess.PIPE)
+                context_filters[context] = filter_text.stdout.decode().strip()
+            return context_filters
+
+
 
 def main():
     myprojects = Task()
@@ -79,6 +95,7 @@ def main():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user.db'
     letters = string.ascii_lowercase
     app.config['SECURITY_PASSWORD_SALT'] = 'ewnieyxnzyjhcc'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db = SQLAlchemy(app)
     roles_users = db.Table('roles_users',
                            db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
