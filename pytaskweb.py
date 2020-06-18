@@ -12,11 +12,15 @@ application = app
 
 class Task:
     """An object to hold task data obtained from the task command"""
-    task_cmd = 'task'
+    task_cmd = '/usr/local/bin/task'
 
     def load_task_data(self, search_filter='(+work -home or -TAGGED) status:pending'):
         """Pull task data from json data exported from the task command"""
-        projoutput = subprocess.run([self.task_cmd, search_filter, 'export'],
+        projoutput = subprocess.run([self.task_cmd, 
+                                    search_filter, 
+                                    'rc:/home/kellya/projects/pytaskweb/.taskrc',
+                                    'rc.data.location=/home/kellya/projects/pytaskweb/.task',
+                                    'export'],
                                     stdout=subprocess.PIPE)
         self.alltasks = json.loads(projoutput.stdout)
 
