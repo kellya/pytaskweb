@@ -12,14 +12,25 @@ application = app
 
 class Task:
     """An object to hold task data obtained from the task command"""
-    task_cmd = '/usr/local/bin/task'
+    task_cmd = '/home/kellya/projects/pytaskweb/bin/task'
+
+    def sync_task_data(self):
+        """ perform a remote sync of data from taskserver"""
+        sync = subprocess.run([self.task_cmd, 'sync'])
+        if sync.returncode == 0:
+           return True
+        else:
+            raise Exception('Error syncing')
+
 
     def load_task_data(self, search_filter='(+work -home or -TAGGED) status:pending'):
         """Pull task data from json data exported from the task command"""
+        try:
+            self.sync_task_data()
+        except:
+            print('Task sync failed')
         projoutput = subprocess.run([self.task_cmd,
                                     search_filter,
-                                    'rc:/home/kellya/projects/pytaskweb/.taskrc',
-                                    'rc.data.location=/home/kellya/projects/pytaskweb/.task',
                                     'export'],
                                     stdout=subprocess.PIPE)
         self.alltasks = json.loads(projoutput.stdout)
@@ -148,7 +159,7 @@ def task_complete(uuid):
     print(str(result))
     if result['submit'] == 'complete':
         taskcommand = []
-        taskcommand.append('task')
+        taskcommand.append('/home/kellya/projects/pytaskweb/bin/task')
         taskcommand.append('done')
         taskcommand.append(result['uuid'])
         subprocess.run(taskcommand)
@@ -161,7 +172,7 @@ def task_add():
     if request.method == 'POST':
         result = request.form.to_dict()
         taskcommand = []
-        taskcommand.append('task')
+        taskcommand.append('/home/kellya/projects/pytaskweb/bin/task')
         taskcommand.append('add')
         taskcommand.append(f"project:{result['project']}")
         if not result['duedate'] == '':
