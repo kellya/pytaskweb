@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "pytaskweb"
+version = "0.1.0"
+description = "Flask-based web interface for TaskWarrior"
+authors = ["Alex Kelly <kellya@arachnitech.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Flask = "^2.0.1"
+Flask-Security = "^3.0.0"
+email-validator = "^1.1.2"
+Flask-SQLAlchemy = "^2.5.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
