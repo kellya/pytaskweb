@@ -13,19 +13,17 @@
         }, 200)
     }
 </script>
-<!--
-<h1>{{ tasks[0]['project'] }} Tasks
-    <a href="" hx-target="#right-container" hx-get="{{ url_for('task_add', project=tasks[0]['project']) }}" class="btn btn-outline-dark" role="button">
-        <i class="fa fa-plus"></i>
-    </a>
-</h1>
--->
 <div id="modals-here"></div>
 <h1>{{ tasks[0]['project'].replace('_', ' ').replace('.','/').capitalize() }} Tasks </h1>
 {% for task in tasks %}
 <div class="card">
     <h5 class="card-title">{{ task['description'].capitalize() }}</h5>
     <p class="card-text">
+        <a href=""
+           class="btn btn.app"
+           >
+           <i class="text-success far fa-check-square"></i>
+        </a>
         <a href=""
            class="btn btn.app"
            hx-get="{{ url_for('task_detail', uuid=task['uuid']) }}"
