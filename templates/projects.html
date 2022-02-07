@@ -1,23 +1,17 @@
-{% extends "base.html" %}
-{% block body %}
-<h1 class="sectiontitle">Projects</h1>
-    <div class="toolbox">
-        <form method="POST" name="projects" action="{{ url_for('projects') }}">
-            <button type="submit" name='sync' title="Refresh project list" value="sync" class="btn btn-outline-dark">
-                <i class="fa fa-refresh"></i>
-            </button>
-            <a href="{{ url_for('task_add', project=none) }}" class="btn btn-outline-dark" role="button" target="centeriframe">
-                <i class="fa fa-plus"></i>
-            </a>
-        </form>
-    </div>
-    {% for project in projects %}
-    {%  if '.' in project %}
-        <div class="child">
-            <span>&#9584;</span><a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ').split('.')[1].capitalize() }}</a><br>
-        </div>
-    {%  else %}
-        <a class="prjbutton" href="{{ url_for('project_tasks', name=project)}}" target='centeriframe'> {{ project.replace('_', ' ').capitalize() }}</a><br>
-    {% endif %}
-    {% endfor %}
-{% endblock %}
+{% for project in projects %}
+{%  if '.' in project %}
+<ul class="nav-sidebar">
+    <li>
+    <a class="nav-link" href="" hx-get="{{ url_for('project_tasks', name=project)}}" hx-target='#right-container'>
+    <i class="fas fa-circle nav-icon"></i>
+        {{ project.replace('_', ' ').split('.')[1].capitalize() }}
+    </a>
+    </li>
+</ul>
+{%  else %}
+<a href="" class="nav-link" hx-get="{{ url_for('project_tasks', name=project)}}" hx-target='#right-container'>
+    <i class="far fa-circle nav-icon"></i>
+    <p>{{ project.replace('_', ' ').capitalize() }}</p>
+</a>
+{% endif %}
+{% endfor %}
